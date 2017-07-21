@@ -10,6 +10,7 @@ http {
     include       mime.types;
 
     server {
+        listen 80;
         server_name     ~^(?<app_id>.+)\.wx\.hcmcloud\.cn$;
         location / {
             rewrite ^ https://$app_id.hcmcloud.cn$request_uri permanent;
@@ -18,7 +19,8 @@ http {
 
 
     server {
-        server_name ~^(?<app_id>.+)\.hcmcloud\.cn$ default;
+        listen 80 default_server;
+        server_name     ~^(?<app_id>.+)\.hcmcloud\.cn$ default;
         location / {
             rewrite ^(.*) https://$server_name$request_uri permanent;
         }
