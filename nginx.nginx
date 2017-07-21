@@ -8,8 +8,20 @@ events {
 
 http {
     include       mime.types;
+
     server {
-        listen 80;
-        rewrite ^(.*) https://$server_name$request_uri permanent;
+        server_name     ~^(?<app_id>.+)\.wx\.hcmcloud\.cn$;
+        location / {
+            rewrite ^ https://$app_id.hcmcloud.cn$request_uri permanent;
+        }
+    }
+
+
+    server {
+        server_name ~^(?<app_id>.+)\.hcmcloud\.cn$ default;
+        location / {
+            rewrite ^(.*) https://$server_name$request_uri permanent;
+        }
+
     }
 }
