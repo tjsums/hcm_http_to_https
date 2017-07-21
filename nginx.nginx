@@ -1,0 +1,15 @@
+user  nobody;
+worker_processes  1;
+
+
+events {
+    worker_connections  10240;
+}
+
+http {
+    include       mime.types;
+    server {
+        listen 80;
+        rewrite ^(.*) https://$server_name$request_uri permanent;
+    }
+}
