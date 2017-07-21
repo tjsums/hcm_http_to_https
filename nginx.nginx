@@ -20,7 +20,7 @@ http {
 
     server {
         listen 80 default_server;
-        server_name     ~^(?<app_id>.+)\.hcmcloud\.cn$ default;
+        server_name     ~^(?<app_id>.+)\.hcmcloud\.cn$;
         location / {
             rewrite ^(.*) https://$server_name$request_uri permanent;
         }
