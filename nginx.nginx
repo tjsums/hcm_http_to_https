@@ -22,7 +22,7 @@ http {
         listen 80 default_server;
         server_name  _;
         location / {
-            rewrite ^ https://$server_name$request_uri permanent;
+            rewrite ^ https://$host$request_uri permanent;
         }
 
     }
